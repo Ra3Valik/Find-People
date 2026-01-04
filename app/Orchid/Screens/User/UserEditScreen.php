@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare( strict_types=1 );
 
 namespace App\Orchid\Screens\User;
 
@@ -33,12 +33,12 @@ class UserEditScreen extends Screen
      *
      * @return array
      */
-    public function query(User $user): iterable
+    public function query( User $user ) : iterable
     {
-        $user->load(['roles']);
+        $user->load( ['roles'] );
 
         return [
-            'user'       => $user,
+            'user' => $user,
             'permission' => $user->statusOfPermissions(),
         ];
     }
@@ -46,7 +46,7 @@ class UserEditScreen extends Screen
     /**
      * The name of the screen displayed in the header.
      */
-    public function name(): ?string
+    public function name() : ?string
     {
         return $this->user->exists ? 'Edit User' : 'Create User';
     }
@@ -54,12 +54,12 @@ class UserEditScreen extends Screen
     /**
      * Display header description.
      */
-    public function description(): ?string
+    public function description() : ?string
     {
         return 'User profile and privileges, including their associated role.';
     }
 
-    public function permission(): ?iterable
+    public function permission() : ?iterable
     {
         return [
             'platform.systems.users',
@@ -71,76 +71,76 @@ class UserEditScreen extends Screen
      *
      * @return Action[]
      */
-    public function commandBar(): iterable
+    public function commandBar() : iterable
     {
         return [
-            Button::make(__('Impersonate user'))
-                ->icon('bg.box-arrow-in-right')
-                ->confirm(__('You can revert to your original state by logging out.'))
-                ->method('loginAs')
-                ->canSee($this->user->exists && $this->user->id !== \request()->user()->id),
+            Button::make( __( 'Impersonate user' ) )
+                ->icon( 'bg.box-arrow-in-right' )
+                ->confirm( __( 'You can revert to your original state by logging out.' ) )
+                ->method( 'loginAs' )
+                ->canSee( $this->user->exists && $this->user->id !== \request()->user()->id ),
 
-            Button::make(__('Remove'))
-                ->icon('bs.trash3')
-                ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
-                ->method('remove')
-                ->canSee($this->user->exists),
+            Button::make( __( 'Remove' ) )
+                ->icon( 'bs.trash3' )
+                ->confirm( __( 'Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.' ) )
+                ->method( 'remove' )
+                ->canSee( $this->user->exists ),
 
-            Button::make(__('Save'))
-                ->icon('bs.check-circle')
-                ->method('save'),
+            Button::make( __( 'Save' ) )
+                ->icon( 'bs.check-circle' )
+                ->method( 'save' ),
         ];
     }
 
     /**
      * @return \Orchid\Screen\Layout[]
      */
-    public function layout(): iterable
+    public function layout() : iterable
     {
         return [
 
-            Layout::block(UserEditLayout::class)
-                ->title(__('Profile Information'))
-                ->description(__('Update your account\'s profile information and email address.'))
+            Layout::block( UserEditLayout::class )
+                ->title( __( 'Profile Information' ) )
+                ->description( __( 'Update your account\'s profile information and email address.' ) )
                 ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
-                        ->method('save')
+                    Button::make( __( 'Save' ) )
+                        ->type( Color::BASIC )
+                        ->icon( 'bs.check-circle' )
+                        ->canSee( $this->user->exists )
+                        ->method( 'save' )
                 ),
 
-            Layout::block(UserPasswordLayout::class)
-                ->title(__('Password'))
-                ->description(__('Ensure your account is using a long, random password to stay secure.'))
+            Layout::block( UserPasswordLayout::class )
+                ->title( __( 'Password' ) )
+                ->description( __( 'Ensure your account is using a long, random password to stay secure.' ) )
                 ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
-                        ->method('save')
+                    Button::make( __( 'Save' ) )
+                        ->type( Color::BASIC )
+                        ->icon( 'bs.check-circle' )
+                        ->canSee( $this->user->exists )
+                        ->method( 'save' )
                 ),
 
-            Layout::block(UserRoleLayout::class)
-                ->title(__('Roles'))
-                ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.'))
+            Layout::block( UserRoleLayout::class )
+                ->title( __( 'Roles' ) )
+                ->description( __( 'A Role defines a set of tasks a user assigned the role is allowed to perform.' ) )
                 ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
-                        ->method('save')
+                    Button::make( __( 'Save' ) )
+                        ->type( Color::BASIC )
+                        ->icon( 'bs.check-circle' )
+                        ->canSee( $this->user->exists )
+                        ->method( 'save' )
                 ),
 
-            Layout::block(RolePermissionLayout::class)
-                ->title(__('Permissions'))
-                ->description(__('Allow the user to perform some actions that are not provided for by his roles'))
+            Layout::block( RolePermissionLayout::class )
+                ->title( __( 'Permissions' ) )
+                ->description( __( 'Allow the user to perform some actions that are not provided for by his roles' ) )
                 ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
-                        ->method('save')
+                    Button::make( __( 'Save' ) )
+                        ->type( Color::BASIC )
+                        ->icon( 'bs.check-circle' )
+                        ->canSee( $this->user->exists )
+                        ->method( 'save' )
                 ),
 
         ];
@@ -149,59 +149,59 @@ class UserEditScreen extends Screen
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(User $user, Request $request)
+    public function save( User $user, Request $request )
     {
-        $request->validate([
+        $request->validate( [
             'user.email' => [
                 'required',
-                Rule::unique(User::class, 'email')->ignore($user),
+                Rule::unique( User::class, 'email' )->ignore( $user ),
             ],
-        ]);
+        ] );
 
-        $permissions = collect($request->get('permissions'))
-            ->map(fn ($value, $key) => [base64_decode($key) => $value])
+        $permissions = collect( $request->get( 'permissions' ) )
+            ->map( fn( $value, $key ) => [base64_decode( $key ) => $value] )
             ->collapse()
             ->toArray();
 
-        $user->when($request->filled('user.password'), function (Builder $builder) use ($request) {
-            $builder->getModel()->password = Hash::make($request->input('user.password'));
-        });
+        $user->when( $request->filled( 'user.password' ), function ( Builder $builder ) use ( $request ) {
+            $builder->getModel()->password = Hash::make( $request->input( 'user.password' ) );
+        } );
 
         $user
-            ->fill($request->collect('user')->except(['password', 'permissions', 'roles'])->toArray())
-            ->forceFill(['permissions' => $permissions])
+            ->fill( $request->collect( 'user' )->except( ['password', 'permissions', 'roles'] )->toArray() )
+            ->forceFill( ['permissions' => $permissions] )
             ->save();
 
-        $user->replaceRoles($request->input('user.roles'));
+        $user->replaceRoles( $request->input( 'user.roles' ) );
 
-        Toast::info(__('User was saved.'));
+        Toast::info( __( 'User was saved.' ) );
 
-        return redirect()->route('platform.systems.users');
+        return redirect()->route( 'platform.systems.users' );
     }
 
     /**
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(User $user)
+    public function remove( User $user )
     {
         $user->delete();
 
-        Toast::info(__('User was removed'));
+        Toast::info( __( 'User was removed' ) );
 
-        return redirect()->route('platform.systems.users');
+        return redirect()->route( 'platform.systems.users' );
     }
 
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function loginAs(User $user)
+    public function loginAs( User $user )
     {
-        Impersonation::loginAs($user);
+        Impersonation::loginAs( $user );
 
-        Toast::info(__('You are now impersonating this user'));
+        Toast::info( __( 'You are now impersonating this user' ) );
 
-        return redirect()->route(config('platform.index'));
+        return redirect()->route( config( 'platform.index' ) );
     }
 }

@@ -70,4 +70,21 @@ class User extends Authenticatable
         'created_at',
         'gender',
     ];
+
+    /**
+     * Return user profile picture or default picture
+     *
+     * @return string
+     */
+    public function getAvatar() : string
+    {
+        if ( !empty( $this->avatar ) ) {
+            return $this->avatar;
+        }
+        $hash = md5( strtolower( trim( $this->email ) ) );
+
+        $default = urlencode( 'https://raw.githubusercontent.com/orchidsoftware/.github/main/web/avatars/gravatar.png' );
+
+        return "https://www.gravatar.com/avatar/$hash?d=$default";
+    }
 }

@@ -161,9 +161,7 @@ Route::get('/users', function () {
 - When using deferred props on the frontend, you should add a nice empty state with pulsing / animated skeleton.
 
 ### Inertia Form General Guidance
-- The recommended way to build forms when using Inertia is with the `<Form>` component - a useful example is below. Use `search-docs` with a query of `form component` for guidance.
-- Forms can also be built using the `useForm` helper for more programmatic control, or to follow existing conventions. Use `search-docs` with a query of `useForm helper` for guidance.
-- `resetOnError`, `resetOnSuccess`, and `setDefaultsOnSuccess` are available on the `<Form>` component. Use `search-docs` with a query of 'form component resetting' for guidance.
+- Build forms using the `useForm` helper. Use the code examples and `search-docs` tool with a query of `useForm helper` for guidance.
 
 
 === laravel/core rules ===
@@ -280,11 +278,16 @@ Wayfinder generates TypeScript functions and types for Laravel controllers and r
 
 
 ### Wayfinder + Inertia
-If your application uses the `<Form>` component from Inertia, you can use Wayfinder to generate form action and method automatically.
-<code-snippet name="Wayfinder Form Component (Vue)" lang="vue">
+If your application uses the `useForm` component from Inertia, you can directly submit to the wayfinder generated functions.
 
-<Form v-bind="store.form()"><input name="title" /></Form>
+<code-snippet name="Wayfinder useForm Example" lang="typescript">
+    import { store } from "@/actions/App/Http/Controllers/ExampleController";
 
+    const form = useForm({
+        name: "My Big Post",
+    });
+
+    form.submit(store());
 </code-snippet>
 
 
@@ -349,62 +352,6 @@ it('has emails', function (string $email) {
 </code-snippet>
 
 
-=== inertia-vue/core rules ===
-
-## Inertia + Vue
-
-- Vue components must have a single root element.
-- Use `router.visit()` or `<Link>` for navigation instead of traditional links.
-
-<code-snippet name="Inertia Client Navigation" lang="vue">
-
-    import { Link } from '@inertiajs/vue3'
-    <Link href="/">Home</Link>
-
-</code-snippet>
-
-
-=== inertia-vue/v2/forms rules ===
-
-## Inertia + Vue Forms
-
-<code-snippet name="`<Form>` Component Example" lang="vue">
-
-<Form
-    action="/users"
-    method="post"
-    #default="{
-        errors,
-        hasErrors,
-        processing,
-        progress,
-        wasSuccessful,
-        recentlySuccessful,
-        setError,
-        clearErrors,
-        resetAndClearErrors,
-        defaults,
-        isDirty,
-        reset,
-        submit,
-  }"
->
-    <input type="text" name="name" />
-
-    <div v-if="errors.name">
-        {{ errors.name }}
-    </div>
-
-    <button type="submit" :disabled="processing">
-        {{ processing ? 'Creating...' : 'Create User' }}
-    </button>
-
-    <div v-if="wasSuccessful">User created successfully!</div>
-</Form>
-
-</code-snippet>
-
-
 === tailwindcss/core rules ===
 
 ## Tailwind Core
@@ -430,44 +377,9 @@ it('has emails', function (string $email) {
 - If existing pages and components support dark mode, new pages and components must support dark mode in a similar way, typically using `dark:`.
 
 
-=== tailwindcss/v4 rules ===
+=== tailwindcss/v3 rules ===
 
-## Tailwind 4
+## Tailwind 3
 
-- Always use Tailwind CSS v4 - do not use the deprecated utilities.
-- `corePlugins` is not supported in Tailwind v4.
-- In Tailwind v4, configuration is CSS-first using the `@theme` directive — no separate `tailwind.config.js` file is needed.
-<code-snippet name="Extending Theme in CSS" lang="css">
-@theme {
-  --color-brand: oklch(0.72 0.11 178);
-}
-</code-snippet>
-
-- In Tailwind v4, you import Tailwind using a regular CSS `@import` statement, not using the `@tailwind` directives used in v3:
-
-<code-snippet name="Tailwind v4 Import Tailwind Diff" lang="diff">
-   - @tailwind base;
-   - @tailwind components;
-   - @tailwind utilities;
-   + @import "tailwindcss";
-</code-snippet>
-
-
-### Replaced Utilities
-- Tailwind v4 removed deprecated utilities. Do not use the deprecated option - use the replacement.
-- Opacity values are still numeric.
-
-| Deprecated |	Replacement |
-|------------+--------------|
-| bg-opacity-* | bg-black/* |
-| text-opacity-* | text-black/* |
-| border-opacity-* | border-black/* |
-| divide-opacity-* | divide-black/* |
-| ring-opacity-* | ring-black/* |
-| placeholder-opacity-* | placeholder-black/* |
-| flex-shrink-* | shrink-* |
-| flex-grow-* | grow-* |
-| overflow-ellipsis | text-ellipsis |
-| decoration-slice | box-decoration-slice |
-| decoration-clone | box-decoration-clone |
+- Always use Tailwind CSS v3 - verify you're using only classes supported by this version.
 </laravel-boost-guidelines>

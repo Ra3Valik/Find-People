@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens;
 
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
 class HomeScreen extends Screen
@@ -11,7 +12,7 @@ class HomeScreen extends Screen
      *
      * @return array
      */
-    public function query(): iterable
+    public function query() : iterable
     {
         return [];
     }
@@ -21,7 +22,7 @@ class HomeScreen extends Screen
      *
      * @return string|null
      */
-    public function name(): ?string
+    public function name() : ?string
     {
         return __( 'admin/main.screen_name' );
     }
@@ -31,9 +32,13 @@ class HomeScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-    public function commandBar(): iterable
+    public function commandBar() : iterable
     {
-        return [];
+        return [
+            Link::make( __( 'admin/main.home_page_link_name' ) )
+                ->icon( 'bs.house' )
+                ->route( 'home' ),
+        ];
     }
 
     /**
@@ -41,7 +46,7 @@ class HomeScreen extends Screen
      *
      * @return \Orchid\Screen\Layout[]|string[]
      */
-    public function layout(): iterable
+    public function layout() : iterable
     {
         return [];
     }

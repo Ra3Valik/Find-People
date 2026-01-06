@@ -5,5 +5,7 @@
         </a>
 
         @include( 'partials.theme-switcher' )
+
+        @include( 'partials.profile' )
     </div>
 </header>

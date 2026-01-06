@@ -26,3 +26,12 @@ function initThemeToggle() {
 }
 
 document.addEventListener('DOMContentLoaded', initThemeToggle);
+let theme = localStorage.getItem( STORAGE_KEY );
+if ( ! theme ) {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = 'dark';
+    } else {
+        theme = 'light';
+    }
+}
+setTheme(theme);

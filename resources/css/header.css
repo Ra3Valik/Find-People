@@ -24,6 +24,7 @@
     text-decoration: underline;
 }
 
+/* Theme switcher */
 .theme-toggle {
     position: relative;
     width: 70px;
@@ -53,3 +54,142 @@ html.dark .theme-toggle__icon--light {
 html:not(.dark) .theme-toggle__icon--dark {
     opacity: 0.3;
 }
+
+
+/* Profile Dropdown */
+.profile-dropdown .profile-image {
+    height: 24px;
+    max-width: 100%;
+    vertical-align: middle;
+    border-radius: 999px;
+    background: var(--muted);
+
+    transition:
+        box-shadow 0.15s ease,
+        transform 0.15s ease;
+}
+
+.profile-dropdown:hover .profile-image {
+    box-shadow: 0 0 0 2px var(--background),
+    0 0 0 4px var(--ring);
+}
+
+.profile-dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* To right corner of parent */
+    top: 100%;
+    background-color: var(--popover);
+    border-radius: 0.25rem;
+    border: 1px solid var(--border);
+    min-width: 130px;
+    padding: 5px;
+    font-size: smaller;
+}
+
+.profile-dropdown:hover .profile-dropdown-content {
+    display: block;
+}
+
+
+.profile__link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.5rem 0.75rem;
+    border-radius: calc(var(--radius) - 0.25rem);
+
+    color: var(--foreground);
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.profile__link:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    text-decoration: none;
+}
+
+.profile__link:focus-visible {
+    background-color: var(--accent);
+}
+
+.profile__link--danger {
+    color: var(--destructive);
+}
+
+.profile__link--danger:hover {
+    background-color: color-mix(
+        in srgb,
+        var(--destructive) 15%,
+        transparent
+    );
+    color: var(--destructive);
+}
+
+/* Auth Actions */
+.auth-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.auth-link {
+    padding: 0.4rem 0.75rem;
+    border-radius: calc(var(--radius) - 0.25rem);
+
+    color: var(--foreground);
+    font-weight: 500;
+    text-decoration: none;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.auth-link:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+}
+
+.auth-button {
+    padding: 0.4rem 0.85rem;
+    border-radius: calc(var(--radius) - 0.25rem);
+
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-weight: 500;
+    text-decoration: none;
+
+    transition:
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.15s ease;
+}
+
+.auth-button:hover {
+    background-color: color-mix(
+        in srgb,
+        var(--primary) 85%,
+        black
+    );
+}
+
+.auth-button:active {
+    transform: translateY(1px);
+}
+
+.auth-link:focus-visible,
+.auth-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--background),
+    0 0 0 4px var(--ring);
+}
+
+

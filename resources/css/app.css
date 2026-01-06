@@ -146,4 +146,53 @@
         background-color: var(--background);
         color: var(--foreground);
     }
+
+    /** Links */
+    a {
+        color: var(--primary);
+        text-decoration: none;
+        text-underline-offset: 0.2em;
+        transition:
+            color 0.15s ease,
+            background-color 0.15s ease,
+            text-decoration-color 0.15s ease;
+    }
+
+    a:hover {
+        color: color-mix(in srgb, var(--primary) 85%, black);
+        text-decoration: underline;
+    }
+
+    a:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--background),
+        0 0 0 4px var(--ring);
+        border-radius: 0.25rem;
+    }
+
+    a:active {
+        color: color-mix(in srgb, var(--primary) 70%, black);
+    }
+
+    .link-underline {
+        position: relative;
+    }
+
+    .link-underline::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 1px;
+        background-color: currentColor;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+
+    .link-underline:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
 }

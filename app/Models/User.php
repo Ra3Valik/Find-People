@@ -81,10 +81,7 @@ class User extends Authenticatable
         if ( !empty( $this->avatar ) ) {
             return $this->avatar;
         }
-        $hash = md5( strtolower( trim( $this->email ) ) );
 
-        $default = urlencode( 'https://raw.githubusercontent.com/orchidsoftware/.github/main/web/avatars/gravatar.png' );
-
-        return "https://www.gravatar.com/avatar/$hash?d=$default";
+        return asset( 'images/default-profile.png' );
     }
 }

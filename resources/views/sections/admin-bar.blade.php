@@ -6,7 +6,7 @@
     <div class="admin-bar__inner">
         <ul class="admin-bar__menu">
             <li class="admin-bar__item">
-                <a class="admin-bar__link"
+                <a class="admin-bar__link link-underline"
                    href="{{ url('/') }}"
                    title="{{ config('app.name') }}"
                 >
@@ -15,7 +15,7 @@
             </li>
 
             <li class="admin-bar__item">
-                <a class="admin-bar__link admin-bar__link--small"
+                <a class="admin-bar__link admin-bar__link--small link-underline"
                    href="{{ route('platform.index') }}"
                 >
                     {{ __('admin/main.screen_name') }}
@@ -40,7 +40,7 @@
                 <form method="POST" action="{{ route('logout') }}" class="admin-bar__logout-form">
                     @csrf
                     <a href="{{ route('logout') }}"
-                       class="admin-bar__link admin-bar__link--danger"
+                       class="admin-bar__link admin-bar__link--danger link-underline"
                        onclick="event.preventDefault(); this.closest('form').submit();"
                     >
                         {{ __('front/auth.logout') }}

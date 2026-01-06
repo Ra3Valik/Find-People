@@ -26,8 +26,8 @@
 
 .theme-toggle {
     position: relative;
-    width: 55px;
-    height: 28px;
+    width: 70px;
+    height: 30px;
 
     border-radius: 999px;
     border: 1px solid var(--border);
@@ -36,7 +36,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 6px;
+    padding: 0 8px;
 
     cursor: pointer;
 }

@@ -47,7 +47,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission( 'platform.systems.roles' )
                 ->divider(),
 
-            Menu::make( __( 'admin/menu.for_devs' ) )
+            Menu::make( __( 'admin/menu.orchid_examples_and_docs' ) )
+                ->title( 'admin/menu.for_devs' )
+                ->icon( 'bs.folder2' )
+                ->permission( 'platform.systems.devs' )
                 ->list( [
                     Menu::make( 'Get Started' )
                         ->permission( 'platform.systems.devs' )
@@ -100,9 +103,7 @@ class PlatformProvider extends OrchidServiceProvider
                         ->url( 'https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md' )
                         ->target( '_blank' )
                         ->badge( fn() => Dashboard::version(), Color::DARK ),
-                ] )
-                ->icon( 'bs.code-square' )
-                ->permission( 'platform.systems.devs' ),
+                ] ),
         ];
     }
 
